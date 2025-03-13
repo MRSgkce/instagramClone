@@ -6,9 +6,13 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseFirestore
 
 class feedableViewCell: UITableViewCell {
 
+    @IBOutlet weak var documentıd: UILabel!
+    @IBOutlet weak var likelabel: UILabel!
     @IBOutlet weak var userımage: UIImageView!
     @IBOutlet weak var comment: UILabel!
     @IBOutlet weak var userlabel: UILabel!
@@ -24,5 +28,10 @@ class feedableViewCell: UITableViewCell {
     }
 
     @IBAction func like(_ sender: Any) {
+        let firestoredatabase = Firestore.firestore()
+        if let likecount = Int(likelabel.text!){
+            let likestore = ["likes": likecount+1] as [String : Any]
+            firestoredatabase.collection("posts").document(documentıd.text!).setData(likestore,merge: true)
+        }
     }
 }

@@ -62,7 +62,7 @@ class flow: UIViewController, UIImagePickerControllerDelegate, UINavigationContr
                             var firestorereference : DocumentReference? = nil
                             
                             let firestorepost = ["imageurl" : imageurl!, "postedBy" : Auth.auth().currentUser!.email!,"postcomment" : self.textgonderi
-                                .text!,"date" : "date", "likes" : 0] as [String : Any]
+                                .text!,"date" : Timestamp(), "likes" : 0] as [String : Any]
                             
                             firestorereference = firestoredatabase.collection("posts").addDocument(data: firestorepost, completion: { (error) in
                                 if error != nil {
